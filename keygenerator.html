@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UH Math 2305 Notes - Go to Section</title>
+  <!-- Google Fonts for a modern look -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #00aaff, #33cc33);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+    }
+    .container {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      width: 90%;
+      margin: auto;
+      padding: 40px;
+      text-align: center;
+    }
+    h2 {
+      margin-top: 0;
+      color: #00aaff;
+      font-weight: 600;
+    }
+    p {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      color: #555;
+    }
+    .section-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    button {
+      background: #33cc33;
+      border: none;
+      border-radius: 25px;
+      padding: 15px 25px;
+      font-size: 1rem;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    button:hover {
+      background: #2eb82e;
+      transform: translateY(-2px);
+    }
+    @media (max-width: 600px) {
+      button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>📚 UH Math 2305 Notes Link Generator</h2>
+    <p>Click a button below to open the corresponding section’s PDF in a new tab.</p>
+    <div class="section-buttons">
+      <button onclick="openSection('4.1')">4.1</button>
+      <button onclick="openSection('4.3')">4.3</button>
+      <button onclick="openSection('4.4')">4.4</button>
+      <button onclick="openSection('5.1')">5.1</button>
+      <button onclick="openSection('5.2')">5.2</button>
+      <button onclick="openSection('5.3')">5.3</button>
+      <button onclick="openSection('6.1')">6.1</button>
+      <button onclick="openSection('6.2')">6.2</button>
+      <button onclick="openSection('6.3')">6.3</button>
+      <button onclick="openSection('6.4')">6.4</button>
+      <button onclick="openSection('6.5')">6.5</button>
+    </div>
+  </div>
+
+  <script>
+    function openSection(section) {
+      // Convert section text (e.g., "6.1") to "61" by removing the dot
+      const sectionNum = section.replace('.', '');
+      // Define the two parts of the URL
+      const baseURL = "https://uofh.sharepoint.com/sites/MATH2305COURSERESOURCES/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FMATH2305COURSERESOURCES%2FShared%20Documents%2FAfter%20Class%20Notes%2F2305%5FS";
+      const finishURL = "F%2Epdf&parent=%2Fsites%2FMATH2305COURSERESOURCES%2FShared%20Documents%2FAfter%20Class%20Notes";
+      const fullURL = `${baseURL}${sectionNum}${finishURL}`;
+      
+      // Open the corresponding PDF in a new tab
+      window.open(fullURL, '_blank');
+    }
+  </script>
+</body>
+</html>
