@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UH Math 2305 - Slide Viewer</title>
+  <!-- Modern font for a polished feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #00aaff, #33cc33);
+      overflow: hidden;
+    }
+    
+    /* Slider container fills the viewport */
+    .slider-wrapper {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    /* Slides container as flex row for smooth sliding */
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      height: 100%;
+    }
+    
+    /* Each slide occupies the full viewport (using vw & vh) */
+    .slide {
+      flex-shrink: 0;
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+    
+    /* Force iframes to fill their container */
+    .slide iframe {
+      width: 100% !important;
+      height: 100% !important;
+      border: none;
+    }
+    
+    /* Navigation button styling */
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(51, 204, 51, 0.8);
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+    }
+    
+    .nav.left {
+      left: 20px;
+    }
+    
+    .nav.right {
+      right: 20px;
+    }
+    
+    /* Dot indicators at the bottom center */
+    .dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+    
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.8);
+      cursor: pointer;
+    }
+    
+    .dot.active {
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="slider-wrapper">
+    <div class="slides" id="slides">
+      <!-- Slide 1: Homework 07 Key -->
+      <div class="slide">
+        <iframe src="https://uofh.sharepoint.com/sites/MATH2305COURSERESOURCES/_layouts/15/embed.aspx?UniqueId=cc16df84-17b1-40bf-880b-367bdc91b43e" 
+                allowfullscreen title="Homework 07 Key"></iframe>
+      </div>
+      <!-- Slide 2: Homework 08 Key -->
+      <div class="slide">
+        <iframe src="https://uofh.sharepoint.com/sites/MATH2305COURSERESOURCES/_layouts/15/embed.aspx?UniqueId=2028866e-b830-414f-9024-57a73f1703b7" 
+                allowfullscreen title="Homework 08 Key"></iframe>
+      </div>
+    </div>
+    <!-- Navigation Buttons -->
+    <button class="nav left" onclick="prevSlide()">&#10094;</button>
+    <button class="nav right" onclick="nextSlide()">&#10095;</button>
+    
+    <!-- Dot Indicators -->
+    <div class="dots">
+      <div class="dot active" onclick="goToSlide(0)"></div>
+      <div class="dot" onclick="goToSlide(1)"></div>
+    </div>
+  </div>
+  
+  <script>
+    let currentSlide = 0;
+    const slides = document.getElementById("slides");
+    const dots = document.querySelectorAll(".dot");
+    const totalSlides = document.querySelectorAll(".slide").length;
+    
+    function updateSlide() {
+      // Translate using viewport units to ensure full-screen sliding
+      slides.style.transform = `translateX(-${currentSlide * 100}vw)`;
+      // Update the dot indicators
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("active", index === currentSlide);
+      });
+    }
+    
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateSlide();
+    }
+    
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateSlide();
+    }
+    
+    function goToSlide(index) {
+      currentSlide = index;
+      updateSlide();
+    }
+    
+    // Listen for keyboard events: arrow keys and Tab key (repurposed for forward navigation)
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "ArrowRight" || e.key === "Tab") {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        prevSlide();
+      }
+    });
+  </script>
+</body>
+</html>
